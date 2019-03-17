@@ -2,17 +2,37 @@ package Company;
 
 import java.util.List;
 
-public class Manager {
+public class Manager extends Employee{
     List<Employee> employees;
-    String name;
-    String type;
-    int id;
-    double salario;
 
-    public Manager(String name, String type, int id, double salario) {
+    public Manager(String name, String id, double salario) {
         this.name = name;
-        this.type = type;
         this.id = id;
         this.salario = salario;
+    }
+
+    @Override
+    public void ponersalario() {
+
+    }
+    @Override
+    public double salario() {
+        return 0;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getSalario() {
+        return salario;
     }
 }
