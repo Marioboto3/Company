@@ -32,7 +32,6 @@ public abstract class Employee {
         this.salario = salario;
     }
 
-
     public abstract double salario();
 
 

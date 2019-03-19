@@ -17,17 +17,18 @@ public class Vendor extends Employee {
     }
     @Override
     public double salario() {
-        return 0;
+        return this.salario;
     }
 
     public void añadirVenta(Venta v)
     {
         this.listadeventas.add(v);
     }
+
     public int size() {return this.listadeventas.size();}
 
     @Override
     public void ponersalario() {
-
+        this.salario=this.salario+10*this.listadeventas.size();
     }
 }
