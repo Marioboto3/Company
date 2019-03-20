@@ -2,8 +2,6 @@ package Company;
 
 public abstract class Employee {
 
-    public abstract void ponersalario();
-
     String name;
     String id;
     double salario;
@@ -32,7 +30,7 @@ public abstract class Employee {
         this.salario = salario;
     }
 
-    public abstract double salario();
+    public abstract double salario(double SalarioBase);
 
 
 }

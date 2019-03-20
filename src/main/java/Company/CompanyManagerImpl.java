@@ -10,10 +10,12 @@ public class CompanyManagerImpl implements CompanyManager {
     public CompanyManagerImpl() {
         this.employees = new HashMap<String, Employee>();
     }
+
     public int get_size()
     {
         return this.employees.size();
     }
+
     public void addEmployee(String id, String name, double salary, String type, String idManager) throws ManagerNotFound {
         Manager m = (Manager) findById(idManager);
         if (m!=null)
@@ -28,9 +30,10 @@ public class CompanyManagerImpl implements CompanyManager {
                 Employee e = new Operator(name, id, salary, idManager);
                 this.employees.put(e.getId(), e);
                 m.addEmployeem(e);
+            }
         }
         else throw new ManagerNotFound("Manager not found");
-        }
+
     }
 
     public void addManager(String id, String name, double salary) {
@@ -46,6 +49,7 @@ public class CompanyManagerImpl implements CompanyManager {
         }
         else throw new VendorNotFoundException("Vendor not found");
     }
+
     public List<Employee> findAllByManager(String idManager) throws ManagerNotFound{
         Employee e = this.employees.get(idManager);
         Manager manager;
@@ -66,9 +70,11 @@ public class CompanyManagerImpl implements CompanyManager {
         }
         else throw new ManagerNotFound("Employee not found");
     }
+
     public List<Employee> findAllOrderBySalary(){
         return null;
     }
+
     public List<Employee> findAllOrderByName(){
         return null;
     }

@@ -12,12 +12,28 @@ public class Manager extends Employee{
         this.salario = salario;
         this.employees= new ArrayList<Employee>();
     }
+
     @Override
-    public void ponersalario() {
-    }
-    @Override
-    public double salario() {
-        return 0;
+    public double salario(double SalarioBase) {
+
+        double venta = 0;
+        double bonus;
+
+        for(Employee employee: employees){
+            if(employee instanceof Vendor){
+                List<Venta> ventas = ((Vendor) employee).getListadeventas();
+                if(ventas!=null) {
+                    for (Venta vent : ventas) {
+                        venta += vent.getVenta();
+                    }
+                }
+            }
+        }
+
+        bonus = venta/100;
+
+        this.salario = SalarioBase + bonus;
+        return this.salario;
     }
 
     public void addEmployeem (Employee e)
@@ -38,4 +54,5 @@ public class Manager extends Employee{
     public double getSalario() {
         return salario;
     }
+
 }

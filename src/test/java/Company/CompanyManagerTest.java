@@ -1,5 +1,7 @@
 package Company;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -7,50 +9,60 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class CompanyManagerTest {
-    private final CompanyManagerImpl Company_test = new CompanyManagerImpl();
+    private CompanyManagerImpl Company_test;
 
+    @Before
+    public void initialize() throws ManagerNotFound, VendorNotFoundException {
+        Company_test = new CompanyManagerImpl();
+
+        Company_test.addManager("1","Antonio",2000);
+        Company_test.addManager("2","Jose",2000);
+        Company_test.addManager("3","Pepe",2000);
+        Company_test.addManager("4","Luisa",2000);
+
+        Company_test.addEmployee("5", "Mario",1000,"vendor","2");
+        Company_test.addEmployee("6", "Pol",1000,"vendor","2");
+        Company_test.addEmployee("7", "Hanni",1000,"vendor","2");
+        Company_test.addEmployee("8", "Marta",1000,"vendor","3");
+        Company_test.addEmployee("9", "Ana",1000,"operator","3");
+        Company_test.addEmployee("10", "Laura",1000,"operator","3");
+        Company_test.addEmployee("11", "Marina",1000,"operator","3");
+        Company_test.addEmployee("12", "Tere",1000,"operator","3");
+
+        Company_test.nuevaVenta("1","5",100);
+    }
+
+    @After
+    public void finish(){
+        Company_test =null;
+    }
     @Test
     public void addEmployee_test() throws ManagerNotFound{
-        Company_test.addManager("2","Jose",1000);
-        Company_test.addEmployee("2", "Mario",1000,"vendor","2");
-        assertEquals(1,Company_test.get_size()); }
+        assertEquals(12,Company_test.get_size()); }
 
     @Test
-    public void addManager_test(){
-        Company_test.addManager("2","Jose",1000);
-        assertEquals(1,Company_test.get_size());
+    public void addManager_test() throws ManagerNotFound{
+
+        Employee e = (Manager)Company_test.findById("2");
+        assertEquals("Jose",e.getName());
     }
     @Test
     public void findById_test() throws ManagerNotFound {
-        Company_test.addManager("2","Jose",2000);
-        Company_test.addEmployee("2", "Mario",1000,"vendor","2");
-        Company_test.addEmployee("3", "Pepe",1000,"vendor","2");
-
-        Employee e= Company_test.findById("2");
+        Employee e= Company_test.findById("5");
         assertEquals("Mario", e.getName());
     }
 
     @Test
     public void findAllByManager () throws ManagerNotFound
     {
-        Company_test.addManager("2","Jose",1000);
-
-        Company_test.addEmployee("2", "Mario",1000,"vendor","2");
-        Company_test.addEmployee("3", "Pepe",1000,"vendor","2");
-        Company_test.addEmployee("4", "Oscar",1000,"vendor","2");
-
         List<Employee> list;
-
         list= Company_test.findAllByManager("2");
-
         assertEquals(3,list.size());
     }
 
     @Test
-    public void nuevaVenta() throws ManagerNotFound, VendorNotFoundException{
-        Company_test.addEmployee("2", "Mario",1000,"vendor","2");
-        Company_test.nuevaVenta("2","2",200);
-        Vendor v = (Vendor) Company_test.findById("2");
+    public void nuevaVenta() throws ManagerNotFound{
+        Vendor v = (Vendor) Company_test.findById("5");
         assertEquals(1,v.size());
     }
 
