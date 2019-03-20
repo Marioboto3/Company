@@ -1,6 +1,7 @@
 package Company;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,21 +34,21 @@ public class CompanyManagerTest {
     }
 
     @After
-    public void finish(){
+    public void tearDown(){
         Company_test =null;
     }
     @Test
-    public void addEmployee_test() throws ManagerNotFound{
+    public void addEmployeeTest() throws ManagerNotFound{
         assertEquals(12,Company_test.get_size()); }
 
     @Test
-    public void addManager_test() throws ManagerNotFound{
+    public void addManagerTest() throws ManagerNotFound{
 
         Employee e = (Manager)Company_test.findById("2");
         assertEquals("Jose",e.getName());
     }
     @Test
-    public void findById_test() throws ManagerNotFound {
+    public void findByIdTest() throws ManagerNotFound {
         Employee e= Company_test.findById("5");
         assertEquals("Mario", e.getName());
     }
@@ -65,5 +66,17 @@ public class CompanyManagerTest {
         Vendor v = (Vendor) Company_test.findById("5");
         assertEquals(1,v.size());
     }
+
+    @Test
+    public void findAllOrderByName (){
+        List<Employee> list;
+        list = Company_test.findAllOrderByName();
+        Assert.assertEquals("Ana",list.get(0).getName());
+
+    }
+    @Test
+    public void salarioTest() throws ManagerNotFound {
+    }
+
 
 }

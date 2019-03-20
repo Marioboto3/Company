@@ -1,6 +1,6 @@
 package Company;
 
-public abstract class Employee {
+public abstract class Employee implements Comparable<Employee>{
 
     String name;
     String id;
@@ -32,5 +32,8 @@ public abstract class Employee {
 
     public abstract double salario(double SalarioBase);
 
+    public int compareTo(Employee e) {
+        return this.name.compareTo(e.name);
+    }
 
 }

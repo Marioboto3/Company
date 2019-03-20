@@ -1,7 +1,6 @@
 package Company;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class CompanyManagerImpl implements CompanyManager {
 
@@ -76,7 +75,13 @@ public class CompanyManagerImpl implements CompanyManager {
     }
 
     public List<Employee> findAllOrderByName(){
-        return null;
-    }
+
+        List<Employee> list = new ArrayList<Employee>();
+        Set<String> stringSet = this.employees.keySet();
+        for(String set: stringSet){
+            list.add(this.employees.get(set));
+        }
+        Collections.sort(list);
+        return list;    }
 
 }
